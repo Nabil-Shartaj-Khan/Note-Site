@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 const AddNoteForm = ({ onAdd, existingNoteToEdit, onUpdate }) => {
   const [form, setForm] = useState({
     title: "",
-    type: "quiz",
+    type: "",
     date: "",
     description: "",
   });
@@ -18,7 +18,11 @@ const AddNoteForm = ({ onAdd, existingNoteToEdit, onUpdate }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.title || !form.date) return;
+
+    if (!form.title || !form.date) {
+      alert("Please fill in both the title and date fields.");
+      return;
+    }
 
     const note = { ...form, id: existingNoteToEdit ? form.id : Date.now() };
     existingNoteToEdit ? onUpdate(note) : onAdd(note);
@@ -39,7 +43,16 @@ const AddNoteForm = ({ onAdd, existingNoteToEdit, onUpdate }) => {
         />
       </div>
       <div className="mb-2">
-        <select name="type" className="form-select" value={form.type} onChange={handleChange}>
+        <select
+          name="type"
+          className="form-select"
+          value={form.type}
+          onChange={handleChange}
+          required
+        >
+          <option value="" disabled>
+            Select quiz / assignment / exam
+          </option>
           <option value="quiz">Quiz</option>
           <option value="assignment">Assignment</option>
           <option value="exam">Exam</option>
@@ -58,12 +71,14 @@ const AddNoteForm = ({ onAdd, existingNoteToEdit, onUpdate }) => {
         <textarea
           name="description"
           className="form-control"
-          placeholder="Description"
+          placeholder="Add exam/quiz/assignment description and no"
           value={form.description}
           onChange={handleChange}
         />
       </div>
-      <button className="btn btn-primary">{existingNoteToEdit ? "Update" : "Add"} Note</button>
+      <button className="btn btn-primary">
+        {existingNoteToEdit ? "Update" : "Add"} Note
+      </button>
     </form>
   );
 };

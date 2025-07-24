@@ -51,8 +51,17 @@ const App = () => {
 
   return (
     <div className="container py-5">
+      <button
+        className="btn btn-outline-info mb-3 float-end"
+        onClick={() => window.open("/how-to-use.html", "_blank")}
+      >
+        ❓ How to Use
+      </button>
+
       <h2 className="mb-4">📚 SoulSync</h2>
-      <span className="text-muted mb-4 d-block">Your Personal Reminder App</span>
+      <span className="text-muted mb-4 d-block">
+        Your Personal Reminder App
+      </span>
 
       <AddNoteForm
         onAdd={addNote}
@@ -96,6 +105,12 @@ const App = () => {
           <CalendarView notes={notes} />
         </div>
       )}
+
+      <footer className="text-center mt-5">
+        <p className="text-muted">
+          © 2025 SoulSync by Nabil Shartaz Khan. All rights reserved.
+        </p>
+      </footer>
     </div>
   );
 };
