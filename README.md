@@ -1,6 +1,6 @@
 # 📒 Note Tracker App
 
-A simple, no-nonsense web app to help you track quizzes, assignments, and exams—all in one place. Add notes with due dates, filter by type, and keep everything stored locally in your browser.
+A simple, no-nonsense web app to help you track quizzes, assignments, and exams—all in one place. Add notes with due dates, filter by type, and keep everything stored locally in your browser. I originally built this for my lovely wife, because I felt she needed a better way to stay on top of her deadlines.
 
 ## 🔧 Features
 
