@@ -4,11 +4,12 @@ A simple, no-nonsense web app to help you track quizzes, assignments, and exams�
 
 ## 🔧 Features
 
-- 📝 Add and categorize notes by type: **Quiz**, **Assignment**, or **Exam**
-- 📅 Filter notes by category
-- 💾 Automatically saves your data using `localStorage`
-- 🧹 Clean Bootstrap UI
-- 🗑 Delete notes when you're done
+- Add notes with a title, description, type, and deadline
+- Filter notes by type (quiz, assignment, exam)
+- Toggle between List View and Calendar View
+- View upcoming deadlines at a glance
+- Auto-saves to your browser’s local storage
+- Alerts for deadlines happening today
 
 ## 🚀 Getting Started
 
@@ -46,11 +47,10 @@ src/
 - React
 - Bootstrap 5
 - LocalStorage
+- React Calendar
 
 ## 📦 Deployment
 
 You can deploy this easily on **Vercel** or **Netlify**. Just point the root to the folder with your `package.json`.
 
 ---
-
-Want to add calendar view, edit support, or reminders? Fork it and go wild.
