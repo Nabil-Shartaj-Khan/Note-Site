@@ -28,7 +28,7 @@ const NoteCard = ({ note, onDelete, onEdit }) => {
               `${daysLeft} days left`
             )
           ) : (
-            "Expired"
+            <span className="text-muted">Expired</span>
           )}
         </p>
         {isToday && (
