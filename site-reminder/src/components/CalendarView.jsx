@@ -37,12 +37,22 @@ const CalendarView = ({ notes }) => {
 
   return (
     <div
-      className="calendar-container d-flex"
-      style={{ gap: "2rem", alignItems: "flex-start" }}
+      className="calendar-container d-flex flex-column flex-md-row"
+      style={{ gap: "1rem", alignItems: "flex-start" }}
     >
-      <Calendar onChange={onDateChange} tileContent={tileContent} />
+      <div style={{ flex: "1 1 auto", minWidth: 0 }}>
+        <Calendar onChange={onDateChange} tileContent={tileContent} />
+      </div>
+
       {selectedDate && notesByDate[selectedDate] && (
-        <div style={{ minWidth: "300px" }}>
+        <div
+          style={{
+            flex: "1 1 auto",
+            minWidth: 0,
+            maxWidth: "100%",
+            marginTop: "1rem",
+          }}
+        >
           <h5>Notes on {selectedDate}:</h5>
           <ul className="list-group">
             {notesByDate[selectedDate].map((note) => (
@@ -56,12 +66,20 @@ const CalendarView = ({ notes }) => {
                     : "danger"
                 }`}
               >
-                <div className="fw-bold"><i>Title:</i> {note.title}</div>
+                <div className="fw-bold">
+                  <i>Title:</i> {note.title}
+                </div>
                 <div className="text-capitalize">
-                  <strong><i>Type:</i></strong> {note.type}
+                  <strong>
+                    <i>Type:</i>
+                  </strong>{" "}
+                  {note.type}
                 </div>
                 <div>
-                  <strong><i>About:</i></strong> {note.description || <em>—</em>}
+                  <strong>
+                    <i>About:</i>
+                  </strong>{" "}
+                  {note.description || <em>—</em>}
                 </div>
               </li>
             ))}
