@@ -1,6 +1,6 @@
 # 📒 SoulSync- Your Personal Reminder App
 
-A simple, no-nonsense web app to help you track quizzes, assignments, and exams—all in one place. Add notes with due dates, filter by type, and keep everything stored locally in your browser. I originally built this for my lovely wife, because I felt she needed a better way to stay on top of her deadlines.
+A simple, no-nonsense progressive web app to help you track quizzes, assignments, and exams—all in one place. Add notes with due dates, filter by type, and keep everything stored locally in your browser. I originally built this for my lovely wife, because I felt she needed a better way to stay on top of her deadlines.
 
 ## 🔧 Features
 
@@ -10,6 +10,7 @@ A simple, no-nonsense web app to help you track quizzes, assignments, and exams�
 - View upcoming deadlines at a glance
 - Auto-saves to your browser’s local storage
 - Alerts for deadlines happening today
+- Progressive web app, so you can download and use any time!
 
 ## 🚀 Getting Started
 
