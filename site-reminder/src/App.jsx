@@ -3,6 +3,7 @@ import AddNoteForm from "./components/AddNoteForm";
 import NotesList from "./components/NotesList";
 import FilterBar from "./components/FilterBar";
 import CalendarView from "./components/CalendarView";
+import InstallButton from "./components/InstallButton";
 
 const App = () => {
   const [notes, setNotes] = useState(() => {
@@ -57,12 +58,13 @@ const App = () => {
       >
         ❓ How to Use
       </button>
+      <InstallButton />
+      
 
       <h2 className="mb-4">📚 SoulSync</h2>
       <span className="text-muted mb-4 d-block">
         Your Personal Reminder App
       </span>
-
       <AddNoteForm
         onAdd={addNote}
         existingNoteToEdit={editingNote}
