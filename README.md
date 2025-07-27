@@ -11,6 +11,7 @@ A simple, no-nonsense progressive web app to help you track quizzes, assignments
 - View upcoming deadlines at a glance
 - Auto-saves to your browser’s local storage
 - Alerts for deadlines happening today
+- Supports both Light/Dark mode
 - Progressive web app, so you can download (both mobile and PC) and use any time!
 
 ## 🚀 Getting Started
