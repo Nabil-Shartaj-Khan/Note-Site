@@ -46,7 +46,7 @@ const NoteCard = ({ note, onDelete, onEdit }) => {
           </button>
           <button
             className="btn btn-sm btn-outline-danger"
-            onClick={() => onDelete(note.id)}
+            onClick={() => onDelete(note)}
           >
             Delete
           </button>

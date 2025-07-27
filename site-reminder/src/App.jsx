@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import ConfirmDeleteModal from "./components/ConfirmDeleteModal";
+import "react-toastify/dist/ReactToastify.css";
 import AddNoteForm from "./components/AddNoteForm";
 import NotesList from "./components/NotesList";
 import FilterBar from "./components/FilterBar";
@@ -6,12 +9,31 @@ import CalendarView from "./components/CalendarView";
 import InstallButton from "./components/InstallButton";
 
 const App = () => {
+  const [noteToDelete, setNoteToDelete] = useState(null);
   const [notes, setNotes] = useState(() => {
     return JSON.parse(localStorage.getItem("notes")) || [];
   });
   const [editingNote, setEditingNote] = useState(null);
   const [filterType, setFilterType] = useState("all");
   const [view, setView] = useState("list"); // "list" or "calendar"
+
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    const saved = localStorage.getItem("theme") || "light";
+    setTheme(saved);
+    document.documentElement.setAttribute("data-bs-theme", saved);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    document.documentElement.setAttribute("data-bs-theme", newTheme);
+    setTheme(newTheme);
+  };
 
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
@@ -33,7 +55,7 @@ const App = () => {
       ? note.type.charAt(0).toUpperCase() + note.type.slice(1)
       : "Note";
 
-    alert(`${typeCapitalized} added successfully!`);
+    toast.success(`${typeCapitalized} added successfully!`);
   };
 
   const updateNote = (updated) => {
@@ -52,14 +74,21 @@ const App = () => {
 
   return (
     <div className="container py-5">
-      <button
-        className="btn btn-outline-info mb-3 float-end"
-        onClick={() => window.open("/how-to-use.html", "_blank")}
-      >
-        ❓ How to Use
-      </button>
-      <InstallButton />
-      
+      <ToastContainer position="top-right" autoClose={3000} />
+      <div className="d-flex justify-content-end align-items-center gap-2 mb-3">
+        <button className="btn btn-outline-info" onClick={toggleTheme}>
+          {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+        </button>
+
+        <button
+          className="btn btn-outline-info"
+          onClick={() => window.open("/how-to-use.html", "_blank")}
+        >
+          ❓ How to Use
+        </button>
+
+        <InstallButton />
+      </div>
 
       <h2 className="mb-4">📚 SoulSync</h2>
       <span className="text-muted mb-4 d-block">
@@ -96,7 +125,7 @@ const App = () => {
           <FilterBar filter={filterType} setFilter={setFilterType} />
           <NotesList
             notes={filteredNotes}
-            onDelete={deleteNote}
+            onDelete={(note) => setNoteToDelete(note)}
             onEdit={setEditingNote}
           />
         </div>
@@ -108,6 +137,15 @@ const App = () => {
         </div>
       )}
 
+      <ConfirmDeleteModal
+        show={!!noteToDelete}
+        onClose={() => setNoteToDelete(null)}
+        onConfirm={() => {
+          deleteNote(noteToDelete.id);
+          setNoteToDelete(null);
+        }}
+      />
+
       <footer className="text-center mt-5">
         <p className="text-muted">
           © 2025 SoulSync by Nabil Shartaz Khan. All rights reserved.
@@ -118,3 +156,4 @@ const App = () => {
 };
 
 export default App;
+import Calendar from "react-calendar";
