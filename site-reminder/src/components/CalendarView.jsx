@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-
+import "../App.css"; // Assuming you have some styles in App.css
 // Helper to format a Date object as 'YYYY-MM-DD' local date (no timezone shift)
 function formatDateLocal(date) {
   const year = date.getFullYear();
@@ -37,7 +37,7 @@ const CalendarView = ({ notes }) => {
 
   return (
     <div
-      className="calendar-container d-flex flex-column flex-md-row"
+      className="calendar-container d-flex flex-column flex-md-row dark-mode"
       style={{ gap: "1rem", alignItems: "flex-start" }}
     >
       <div style={{ flex: "1 1 auto", minWidth: 0 }}>
@@ -58,13 +58,13 @@ const CalendarView = ({ notes }) => {
             {notesByDate[selectedDate].map((note) => (
               <li
                 key={note.id}
-                className={`list-group-item list-group-item-${
+                className={`list-group-item ${
                   note.type === "quiz"
-                    ? "success"
+                    ? "list-group-item-success"
                     : note.type === "assignment"
-                    ? "primary"
-                    : "danger"
-                }`}
+                    ? "list-group-item-primary"
+                    : "list-group-item-danger"
+                } bg-dark text-light`}
               >
                 <div className="fw-bold">
                   <i>Title:</i> {note.title}

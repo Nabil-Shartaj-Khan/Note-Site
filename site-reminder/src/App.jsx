@@ -7,6 +7,7 @@ import NotesList from "./components/NotesList";
 import FilterBar from "./components/FilterBar";
 import CalendarView from "./components/CalendarView";
 import InstallButton from "./components/InstallButton";
+import "./App.css"; // Your styles including blur CSS
 
 const App = () => {
   const [noteToDelete, setNoteToDelete] = useState(null);
@@ -75,67 +76,77 @@ const App = () => {
   return (
     <div className="container py-5">
       <ToastContainer position="top-right" autoClose={3000} />
-      <div className="d-flex justify-content-end align-items-center gap-2 mb-3">
-        <button className="btn btn-outline-info" onClick={toggleTheme}>
-          {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
-        </button>
 
-        <button
-          className="btn btn-outline-info"
-          onClick={() => window.open("/how-to-use.html", "_blank")}
-        >
-          ❓ How to Use
-        </button>
+      <div className={`main-content ${noteToDelete ? "blurred" : ""}`}>
+        <div className="d-flex justify-content-end align-items-center gap-2 mb-3">
+          <button className="btn btn-outline-info" onClick={toggleTheme}>
+            {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+          </button>
 
-        <InstallButton />
-      </div>
+          <button
+            className="btn btn-outline-info"
+            onClick={() => window.open("/how-to-use.html", "_blank")}
+          >
+            ❓ How to Use
+          </button>
 
-      <h2 className="mb-4">📚 SoulSync</h2>
-      <span className="text-muted mb-4 d-block">
-        Your Personal Reminder App
-      </span>
-      <AddNoteForm
-        onAdd={addNote}
-        existingNoteToEdit={editingNote}
-        onUpdate={updateNote}
-      />
-
-      {/* View toggle buttons */}
-      <div className="mb-4 text-center">
-        <button
-          className={`btn me-2 ${
-            view === "list" ? "btn-primary" : "btn-outline-primary"
-          }`}
-          onClick={() => setView("list")}
-        >
-          List View
-        </button>
-        <button
-          className={`btn ${
-            view === "calendar" ? "btn-primary" : "btn-outline-primary"
-          }`}
-          onClick={() => setView("calendar")}
-        >
-          Calendar View
-        </button>
-      </div>
-
-      {view === "list" && (
-        <div className="centered-container">
-          <FilterBar filter={filterType} setFilter={setFilterType} />
-          <NotesList
-            notes={filteredNotes}
-            onDelete={(note) => setNoteToDelete(note)}
-            onEdit={setEditingNote}
-          />
+          <InstallButton />
         </div>
-      )}
 
-      {view === "calendar" && (
-        <div className="centered-container">
-          <CalendarView notes={notes} />
+        <h2 className="mb-4">📚 SoulSync</h2>
+        <span className="text-muted mb-4 d-block">
+          Your Personal Reminder App
+        </span>
+
+        <AddNoteForm
+          onAdd={addNote}
+          existingNoteToEdit={editingNote}
+          onUpdate={updateNote}
+        />
+
+        {/* View toggle buttons */}
+        <div className="mb-4 text-center">
+          <button
+            className={`btn me-2 ${
+              view === "list" ? "btn-primary" : "btn-outline-primary"
+            }`}
+            onClick={() => setView("list")}
+          >
+            List View
+          </button>
+          <button
+            className={`btn ${
+              view === "calendar" ? "btn-primary" : "btn-outline-primary"
+            }`}
+            onClick={() => setView("calendar")}
+          >
+            Calendar View
+          </button>
         </div>
-      )}
+
+        {view === "list" && (
+          <div className="centered-container">
+            <FilterBar filter={filterType} setFilter={setFilterType} />
+            <NotesList
+              notes={filteredNotes}
+              onDelete={(note) => setNoteToDelete(note)}
+              onEdit={setEditingNote}
+            />
+          </div>
+        )}
+
+        {view === "calendar" && (
+          <div className="centered-container">
+            <CalendarView notes={notes} />
+          </div>
+        )}
+
+        <footer className="text-center mt-5">
+          <p className="text-muted">
+            © 2025 SoulSync by Nabil Shartaz Khan. All rights reserved.
+          </p>
+        </footer>
+      </div>
 
       <ConfirmDeleteModal
         show={!!noteToDelete}
@@ -145,15 +156,8 @@ const App = () => {
           setNoteToDelete(null);
         }}
       />
-
-      <footer className="text-center mt-5">
-        <p className="text-muted">
-          © 2025 SoulSync by Nabil Shartaz Khan. All rights reserved.
-        </p>
-      </footer>
     </div>
   );
 };
 
 export default App;
-import Calendar from "react-calendar";
